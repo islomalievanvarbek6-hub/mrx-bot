@@ -11,7 +11,7 @@ import re
 from collections import defaultdict
 
 # КОНФИГУРАЦИЯ
-BOT_TOKEN = "8356775204:AAFN7MPBxtPlIOlruqDQiPnrf9Q_e5v3rO4"  # Токенуңузду текшериңиз!
+BOT_TOKEN = "8223819252:AAHITzl1-monrSkS775VLL4BaY0AMQp80k8"  # Токенуңузду текшериңиз!
 ADMIN_ID = 7804443638
 ADMIN_USERNAME = "@mrxkasa"
 CHANNELS = [
