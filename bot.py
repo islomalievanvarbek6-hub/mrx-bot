@@ -3257,16 +3257,18 @@ async def handle_callback_query(update: Update, context: ContextTypes.DEFAULT_TY
             await query.message.reply_text("Нет предыдущей ставки для удвоения")
 
 def main():
-    app = Application.builder().token(BOT_TOKEN).build()
+    # Жаңы Application түзүү
+    app = Application.builder().token(BOT_TOKEN).concurrent_updates(True).build()
 
     try:
         job_queue = app.job_queue
         if job_queue:
             job_queue.run_repeating(reset_daily_limits_job, interval=43200, first=10)
             job_queue.run_repeating(check_muted_users_job, interval=300, first=10)
-    except:
-        logger.info("JobQueue нет, лимиты не будут сбрасываться автоматически")
+    except Exception as e:
+        logger.error(f"JobQueue иштөөдө ката: {e}")
 
+    # Командаларды кошуу
     app.add_handler(CommandHandler("start", start))
     app.add_handler(CommandHandler("id", handle_id_command))
     app.add_handler(CommandHandler("setname", handle_setname_command))
@@ -3294,7 +3296,89 @@ def main():
     print("✅ Результат болгондо: Рулетка: 1🔴")
     print("✅ 7 кнопка менен меню иштейт")
 
-    app.run_polling(allowed_updates=Update.ALL_TYPES)
+    # Жаңы polling метод
+    app.run_polling(allowed_updates=Update.ALL_TYPES, drop_pending_updates=True)def main():
+    # Жаңы Application түзүү
+    app = Application.builder().token(BOT_TOKEN).concurrent_updates(True).build()
 
+    try:
+        job_queue = app.job_queue
+        if job_queue:
+            job_queue.run_repeating(reset_daily_limits_job, interval=43200, first=10)
+            job_queue.run_repeating(check_muted_users_job, interval=300, first=10)
+    except Exception as e:
+        logger.error(f"JobQueue иштөөдө ката: {e}")
+
+    # Командаларды кошуу
+    app.add_handler(CommandHandler("start", start))
+    app.add_handler(CommandHandler("id", handle_id_command))
+    app.add_handler(CommandHandler("setname", handle_setname_command))
+    app.add_handler(CommandHandler("addcoins", handle_addcoins_command))
+    app.add_handler(CommandHandler("removecoins", handle_removecoins_command))
+    app.add_handler(CommandHandler("setlimit", handle_setlimit_command))
+    app.add_handler(CommandHandler("limits", handle_limits_command))
+    app.add_handler(CommandHandler("resetbalances", handle_resetbalances_command))
+    app.add_handler(CommandHandler("reducebalances", handle_reducebalances_command))
+    app.add_handler(CommandHandler("ruleka", Games.ruleka))
+    app.add_handler(CommandHandler("roulette", Games.ruleka))
+    app.add_handler(CommandHandler("banditka", Games.banditka))
+    app.add_handler(CommandHandler("bandit", Games.banditka))
+
+    app.add_handler(CallbackQueryHandler(handle_callback_query))
+
+    app.add_handler(MessageHandler(
+        filters.TEXT & ~filters.COMMAND,
+        handle_text_messages
+    ))
+
+    print("🤖 Бот запущен!")
+    print("✅ '1000 1-12' → Cтавка принята: Имя 77 на 1-12")
+    print("✅ 'Ва-банк 0-5' → Cтавка принята: Имя 16666 на 0-5")
+    print("✅ Результат болгондо: Рулетка: 1🔴")
+    print("✅ 7 кнопка менен меню иштейт")
+
+    # Жаңы polling метод
+    app.run_polling(allowed_updates=Update.ALL_TYPES, drop_pending_updates=True)def main():
+    # Жаңы Application түзүү
+    app = Application.builder().token(BOT_TOKEN).concurrent_updates(True).build()
+
+    try:
+        job_queue = app.job_queue
+        if job_queue:
+            job_queue.run_repeating(reset_daily_limits_job, interval=43200, first=10)
+            job_queue.run_repeating(check_muted_users_job, interval=300, first=10)
+    except Exception as e:
+        logger.error(f"JobQueue иштөөдө ката: {e}")
+
+    # Командаларды кошуу
+    app.add_handler(CommandHandler("start", start))
+    app.add_handler(CommandHandler("id", handle_id_command))
+    app.add_handler(CommandHandler("setname", handle_setname_command))
+    app.add_handler(CommandHandler("addcoins", handle_addcoins_command))
+    app.add_handler(CommandHandler("removecoins", handle_removecoins_command))
+    app.add_handler(CommandHandler("setlimit", handle_setlimit_command))
+    app.add_handler(CommandHandler("limits", handle_limits_command))
+    app.add_handler(CommandHandler("resetbalances", handle_resetbalances_command))
+    app.add_handler(CommandHandler("reducebalances", handle_reducebalances_command))
+    app.add_handler(CommandHandler("ruleka", Games.ruleka))
+    app.add_handler(CommandHandler("roulette", Games.ruleka))
+    app.add_handler(CommandHandler("banditka", Games.banditka))
+    app.add_handler(CommandHandler("bandit", Games.banditka))
+
+    app.add_handler(CallbackQueryHandler(handle_callback_query))
+
+    app.add_handler(MessageHandler(
+        filters.TEXT & ~filters.COMMAND,
+        handle_text_messages
+    ))
+
+    print("🤖 Бот запущен!")
+    print("✅ '1000 1-12' → Cтавка принята: Имя 77 на 1-12")
+    print("✅ 'Ва-банк 0-5' → Cтавка принята: Имя 16666 на 0-5")
+    print("✅ Результат болгондо: Рулетка: 1🔴")
+    print("✅ 7 кнопка менен меню иштейт")
+
+    # Жаңы polling метод
+    app.run_polling(allowed_updates=Update.ALL_TYPES, drop_pending_updates=True)
 if __name__ == "__main__":
     main()
