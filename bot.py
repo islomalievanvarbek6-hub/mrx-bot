@@ -32,7 +32,7 @@ TRANSFER_COOLDOWN_HOURS = 6
 TRANSFER_DAILY_LIMIT = 10000
 
 # GIF файлы - Render'де жок болсо, аны URL менен алмаштырыңыз
-GIF_PATH = "animation.gif"  # Эгерде GIF жок болсо, жөнөкөй текст колдонулат
+GIF_PATH = "roulette_video.mp4"  # Эгерде GIF жок болсо, жөнөкөй текст колдонулат
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
